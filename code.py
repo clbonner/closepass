@@ -1,4 +1,5 @@
-from . import closepass
+import closepass
 
 while True:
-    checkDistance()
+    if (distance = tooClose()):
+        closePass(distance)
