@@ -9,7 +9,7 @@ buzzer = pwmio.PWMOut(board.GP2, duty_cycle = 0, frequency = 800)
 led = digitalio.DigitalInOut(board.GP25)
 led.direction = digitalio.Direction.OUTPUT
 
-def checkDistance():
+def tooClose():
     try:
         if (sonar.distance > 30 and sonar.distance < 150):
             return sonar.distance;
@@ -23,7 +23,7 @@ def closePass(distance):
     led.value = True
     buzzer.duty_cycle = 2000
     
-    while (distance = checkDistance()):
+    while (distance = tooClose()):
         if distance < closestDistance:
             closestDistance = distance
 
