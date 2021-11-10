@@ -4,5 +4,5 @@ from closepass import *
 
 while True:
     distance = getDistance()
-    if(isClosePass(distance)):
+    if (isClosePass(distance)):
         logClosePass(distance)
