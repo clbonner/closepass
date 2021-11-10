@@ -10,20 +10,22 @@ led = digitalio.DigitalInOut(board.GP25)
 led.direction = digitalio.Direction.OUTPUT
 
 def checkDistance():
-    if (sonar.distance > 30 and sonar.distance < 150):
-        closePass(sonar.distance)
-    time.sleep(0.2)
-    return
+    try:
+        if (sonar.distance > 30 and sonar.distance < 150):
+            return sonar.distance;
+    except RuntimeError:
+        pass # just try again
+    
+    return False
 
 def closePass(distance):
     closestDistance = distance
     led.value = True
     buzzer.duty_cycle = 2000
     
-    while (sonar.distance > 30 and sonar.distance < 150):
-        if sonar.distance < closestDistance:
-            closestDistance = sonar.distance
-        time.sleep(0.2)
+    while (distance = checkDistance()):
+        if distance < closestDistance:
+            closestDistance = distance
 
     led.value = False
     buzzer.duty_cycle = 0
@@ -34,7 +36,3 @@ def closePass(distance):
 # if storage full then write over log
 def logClosePass(distance):
     print("Closest Distance:", distance)
-    
-
-while True:
-    checkDistance()
