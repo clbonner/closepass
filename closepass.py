@@ -4,35 +4,46 @@ import adafruit_hcsr04
 import digitalio
 import pwmio
 
+# upper and lower distances for sensor
+UPPER = 150
+LOWER = 30
+
 sonar = adafruit_hcsr04.HCSR04(trigger_pin=board.GP0, echo_pin=board.GP1)
 buzzer = pwmio.PWMOut(board.GP2, duty_cycle = 0, frequency = 800)
 led = digitalio.DigitalInOut(board.GP25)
 led.direction = digitalio.Direction.OUTPUT
 
-def tooClose():
+# returns sensor distance
+def getDistance():
     try:
-        if (sonar.distance > 30 and sonar.distance < 150):
-            return sonar.distance;
+        time.sleep(0.5)
+        return sonar.distance
     except RuntimeError:
         pass # just try again
-    
-    return False
 
-def closePass(distance):
+# checks if a close pass has occurred
+def isClosePass(distance):
+    if (distance > LOWER and distance < UPPER):
+        return True
+    else:
+        return False
+    
+# get closest distance of vehicle and GPS location, log on SD card
+def logClosePass(distance):
     closestDistance = distance
     led.value = True
     buzzer.duty_cycle = 2000
     
-    while (distance = tooClose()):
-        if distance < closestDistance:
+    while isClosePass(distance):
+        distance = getDistance()
+        if isClosePass(distance) and distance < closestDistance:
             closestDistance = distance
 
+    # GPS location to implement
+    
     led.value = False
     buzzer.duty_cycle = 0
-    logClosePass(closestDistance)
 
-
-# store close pass distance on local datastore
-# if storage full then write over log
-def logClosePass(distance):
-    print("Closest Distance:", distance)
+    print("Closest Distance:", closestDistance)
+    
+    # SD card to implement

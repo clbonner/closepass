@@ -1,5 +1,8 @@
-import closepass
+# entry point for running the close pass data logger
+
+from closepass import *
 
 while True:
-    if (distance = tooClose()):
-        closePass(distance)
+    distance = getDistance()
+    if(isClosePass(distance)):
+        logClosePass(distance)
