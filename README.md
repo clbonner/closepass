@@ -11,6 +11,13 @@ Main components:
 * Raspberry Pi Pico Microcontroller
 * RCWL-1601 Untrasonic Sensor
 * ADA4279 Adafruit Ultimate GPS with USB
+* Adafruit SD Card Breakout
+
+Software components:
+
+* CircuitPython
+* Adafruit HCSR04 Sensor Library
+* Adafruit GPS Library
 
 ----
 
