@@ -1,8 +1,4 @@
-import time
-import board
-import adafruit_hcsr04
-import digitalio
-import pwmio
+import time, board, adafruit_hcsr04, digitalio, pwmio
 
 # upper and lower distances for sensor
 UPPER = 150
