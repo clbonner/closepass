@@ -23,10 +23,7 @@ def getDistance():
 
 # checks if a close pass has occurred
 def isClosePass(distance):
-    if (distance > LOWER and distance < UPPER):
-        return True
-    else:
-        return False
+    True if distance > LOWER and distance < UPPER else False
     
 # get closest distance of vehicle and GPS location, log on SD card
 def logClosePass(distance):
