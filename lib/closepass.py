@@ -34,6 +34,7 @@ def logClosePass(distance):
     led.value = True
     buzzer.duty_cycle = 2000
     
+    # get furthest and closest distance as the car passes
     while isClosePass(distance):
         distance = getDistance()
         if isClosePass(distance) and distance < closestDistance:
