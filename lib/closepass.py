@@ -1,4 +1,5 @@
-import time, board, adafruit_hcsr04, digitalio, pwmio
+import time, board, adafruit_hcsr04, digitalio, pwmio, busio, adafruit_gps
+import closepass_gps
 
 # upper and lower distances for sensor
 UPPER = 150
@@ -8,6 +9,8 @@ sonar = adafruit_hcsr04.HCSR04(trigger_pin=board.GP16, echo_pin=board.GP17)
 buzzer = pwmio.PWMOut(board.GP0, duty_cycle = 0, frequency = 800)
 led = digitalio.DigitalInOut(board.GP25)
 led.direction = digitalio.Direction.OUTPUT
+uart = busio.UART(board.GP4, board.GP4, baudrate=9600, timeout=10)
+gps = adafruit_gps.GPS(uart)
 
 # returns sensor distance
 def getDistance():
