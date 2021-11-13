@@ -30,6 +30,7 @@ def isClosePass(distance):
 # get closest distance of vehicle and GPS location, log on SD card
 def logClosePass(distance):
     closestDistance = distance
+    furthestDistance = distance
     led.value = True
     buzzer.duty_cycle = 2000
     
@@ -37,6 +38,8 @@ def logClosePass(distance):
         distance = getDistance()
         if isClosePass(distance) and distance < closestDistance:
             closestDistance = distance
+        if isClosePass(distance) and distance > furthestDistance:
+            furthestDistance = distance
 
     # GPS location to implement
     
@@ -44,6 +47,7 @@ def logClosePass(distance):
     buzzer.duty_cycle = 0
 
     print("Closest Distance:", closestDistance)
+    print("Furthest Distance: ", furthestDistance)
     
     # SD card to implement
 
