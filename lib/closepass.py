@@ -6,7 +6,6 @@ UPPER = 150
 LOWER = 30
 
 sonar = adafruit_hcsr04.HCSR04(trigger_pin=board.GP16, echo_pin=board.GP17)
-buzzer = pwmio.PWMOut(board.GP0, duty_cycle = 0, frequency = 800)
 led = digitalio.DigitalInOut(board.GP25)
 led.direction = digitalio.Direction.OUTPUT
 uart = busio.UART(board.GP4, board.GP4, baudrate=9600, timeout=10)
@@ -32,7 +31,6 @@ def logClosePass(distance):
     closestDistance = distance
     furthestDistance = distance
     led.value = True
-    buzzer.duty_cycle = 2000
     
     # get furthest and closest distance as the car passes
     while isClosePass(distance):
@@ -45,10 +43,10 @@ def logClosePass(distance):
     # GPS location to implement
     
     led.value = False
-    buzzer.duty_cycle = 0
 
     print("Closest Distance:", closestDistance)
     print("Furthest Distance: ", furthestDistance)
     
     # SD card to implement
+    buzzer.duty_cycle = 0
 
