@@ -23,5 +23,4 @@ Software components:
 
 Still to implmement:
 * GPS logger
-* SD card data storage
 * Schematic drawings
